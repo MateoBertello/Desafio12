@@ -1,25 +1,24 @@
-package tienda.dao;
+package desafiobd12.dao; // Paquete corregido
 
-import tienda.conexion.ConexionDB;
-import tienda.modelo.Categoria;
+// Imports corregidos
+import desafiobd12.conexion.ConexionTienda;
+import desafiobd12.modelo.Categoria;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-// El DAO de Categoria es un CRUD estándar
 public class CategoriaDAO {
 
     public boolean insertar(Categoria categoria) {
-        // Usamos RETURN_GENERATED_KEYS para obtener el ID auto-incremental
         String sql = "INSERT INTO categorias (nombre) VALUES (?)";
-        try (Connection conn = ConexionDB.obtenerConexion();
+        try (Connection conn = ConexionTienda.obtenerConexion(); // Conexión corregida
              PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             
             pstmt.setString(1, categoria.getNombre());
             
             boolean insertado = pstmt.executeUpdate() > 0;
             if (insertado) {
-                // Recuperar el ID generado y asignarlo al objeto
                 try (ResultSet rs = pstmt.getGeneratedKeys()) {
                     if (rs.next()) {
                         categoria.setId(rs.getInt(1));
@@ -35,7 +34,7 @@ public class CategoriaDAO {
 
     public Categoria obtenerPorId(int id) {
         String sql = "SELECT * FROM categorias WHERE id = ?";
-        try (Connection conn = ConexionDB.obtenerConexion();
+        try (Connection conn = ConexionTienda.obtenerConexion(); // Conexión corregida
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             
             pstmt.setInt(1, id);
@@ -53,7 +52,7 @@ public class CategoriaDAO {
     public List<Categoria> obtenerTodos() {
         List<Categoria> categorias = new ArrayList<>();
         String sql = "SELECT * FROM categorias ORDER BY nombre";
-        try (Connection conn = ConexionDB.obtenerConexion();
+        try (Connection conn = ConexionTienda.obtenerConexion(); // Conexión corregida
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             
@@ -65,8 +64,6 @@ public class CategoriaDAO {
         }
         return categorias;
     }
-    
-    // (Puedes implementar actualizar() y eliminar() si lo deseas)
     
     private Categoria crearCategoriaDesdeResultSet(ResultSet rs) throws SQLException {
         return new Categoria(

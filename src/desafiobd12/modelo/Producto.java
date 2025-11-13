@@ -1,16 +1,14 @@
-package tienda.modelo;
+package desafiobd12.modelo; // Paquete corregido
 
-// Esta clase "contiene" un objeto Categoria
 public class Producto {
     private int id;
     private String nombre;
     private double precio;
     private int stock;
-    private Categoria categoria; // ⭐ Objeto Categoria (Composición)
+    private Categoria categoria; 
 
     public Producto() {}
 
-    // Constructor sin ID (para inserciones)
     public Producto(String nombre, double precio, int stock, Categoria categoria) {
         this.nombre = nombre;
         this.precio = precio;
@@ -18,7 +16,6 @@ public class Producto {
         this.categoria = categoria;
     }
 
-    // Constructor completo (para lecturas)
     public Producto(int id, String nombre, double precio, int stock, Categoria categoria) {
         this.id = id;
         this.nombre = nombre;
@@ -27,7 +24,6 @@ public class Producto {
         this.categoria = categoria;
     }
 
-    // Getters y Setters
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
     public String getNombre() { return nombre; }

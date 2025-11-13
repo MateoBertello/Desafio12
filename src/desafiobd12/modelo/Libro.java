@@ -1,4 +1,4 @@
-package modelo;
+package desafiobd12.modelo; // Paquete corregido
 
 public class Libro {
     private int id;
@@ -8,10 +8,10 @@ public class Libro {
     private String isbn;
     private boolean disponible;
     
-    // Constructor vacío
+    // ... (Constructores, Getters y Setters no cambian) ...
+    
     public Libro() {}
 
-    // Constructor para inserciones (sin ID)
     public Libro(String titulo, String autor, int anoPublicacion, String isbn, boolean disponible) {
         this.titulo = titulo;
         this.autor = autor;
@@ -20,7 +20,6 @@ public class Libro {
         this.disponible = disponible;
     }
 
-    // Constructor completo (para lecturas de la BD)
     public Libro(int id, String titulo, String autor, int anoPublicacion, String isbn, boolean disponible) {
         this.id = id;
         this.titulo = titulo;
@@ -30,7 +29,6 @@ public class Libro {
         this.disponible = disponible;
     }
 
-    // Getters y Setters
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
     public String getTitulo() { return titulo; }
@@ -49,4 +47,4 @@ public class Libro {
         return String.format("Libro[ID=%d, Titulo=%s, Autor=%s, Año=%d, Disponible=%b]",
                 id, titulo, autor, anoPublicacion, disponible);
     }
-} 
+}

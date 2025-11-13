@@ -1,4 +1,4 @@
-package tienda.modelo;
+package desafiobd12.modelo; // Paquete corregido
 
 public class Categoria {
     private int id;
@@ -6,18 +6,15 @@ public class Categoria {
 
     public Categoria() {}
 
-    // Constructor para inserciones (sin ID)
     public Categoria(String nombre) {
         this.nombre = nombre;
     }
     
-    // Constructor completo
     public Categoria(int id, String nombre) {
         this.id = id;
         this.nombre = nombre;
     }
     
-    // Getters y Setters
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
     public String getNombre() { return nombre; }

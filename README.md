@@ -1,6 +1,7 @@
 Comandos Query para MySQL:
 
 1----------------------------------------------------------------------------------------------------------------------
+
 CREATE DATABASE IF NOT EXISTS biblioteca;
 
 USE biblioteca;
@@ -21,6 +22,7 @@ INSERT INTO libros (titulo, autor, ano_publicacion, isbn, disponible) VALUES
 ('1984', 'George Orwell', 1949, '978-0451524935', TRUE);
 
 2--------------------------------------------------------------------------------------------------------------------
+
 CREATE DATABASE IF NOT EXISTS tienda;
 
 USE tienda;
@@ -53,6 +55,7 @@ INSERT INTO productos (nombre, precio, stock, categoria_id) VALUES
 ('Gaseosa 2L', 2.10, 80, (SELECT id FROM categorias WHERE nombre = 'Bebidas'));
 
 3---------------------------------------------------------------------------------------------------------------
+
 CREATE DATABASE IF NOT EXISTS academia;
 
 USE academia;

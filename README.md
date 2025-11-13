@@ -1,6 +1,6 @@
 Comandos Query para MySQL:
 
-1-
+1----------------------------------------------------------------------------------------------------------------------
 CREATE DATABASE IF NOT EXISTS biblioteca;
 
 USE biblioteca;
@@ -20,7 +20,7 @@ INSERT INTO libros (titulo, autor, ano_publicacion, isbn, disponible) VALUES
 ('El Señor de los Anillos', 'J.R.R. Tolkien', 1954, '978-8445071793', TRUE),
 ('1984', 'George Orwell', 1949, '978-0451524935', TRUE);
 
-2-
+2--------------------------------------------------------------------------------------------------------------------
 CREATE DATABASE IF NOT EXISTS tienda;
 
 USE tienda;
@@ -51,3 +51,36 @@ INSERT INTO productos (nombre, precio, stock, categoria_id) VALUES
 ('Queso Cremoso 500g', 4.20, 50, (SELECT id FROM categorias WHERE nombre = 'Lácteos')),
 ('Pan Francés', 0.80, 200, (SELECT id FROM categorias WHERE nombre = 'Panadería')),
 ('Gaseosa 2L', 2.10, 80, (SELECT id FROM categorias WHERE nombre = 'Bebidas'));
+
+3---------------------------------------------------------------------------------------------------------------
+CREATE DATABASE IF NOT EXISTS academia;
+
+USE academia;
+
+CREATE TABLE IF NOT EXISTS estudiantes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    apellido VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS calificaciones (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    estudiante_id INT NOT NULL,
+    materia VARCHAR(100) NOT NULL,
+    nota DECIMAL(4, 2) NOT NULL, -- Ej. 10.00 o 7.50
+    fecha DATE NOT NULL,
+    FOREIGN KEY (estudiante_id) REFERENCES estudiantes(id)
+        ON DELETE CASCADE ON UPDATE CASCADE 
+        -- Usamos ON DELETE CASCADE para que si se borra un estudiante, 
+        -- también se borren sus notas.
+);
+
+
+INSERT INTO estudiantes (nombre, apellido) VALUES
+('Ana', 'López'),
+('Luis', 'Martínez');
+
+INSERT INTO calificaciones (estudiante_id, materia, nota, fecha) VALUES
+((SELECT id FROM estudiantes WHERE nombre = 'Ana'), 'Matemáticas', 8.50, '2024-10-01'),
+((SELECT id FROM estudiantes WHERE nombre = 'Ana'), 'Historia', 7.00, '2024-10-02'),
+((SELECT id FROM estudiantes WHERE nombre = 'Luis'), 'Matemáticas', 9.00, '2024-10-01');
